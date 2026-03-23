@@ -1,0 +1,75 @@
+{
+  "name": "lite-clipboard",
+  "version": "0.2.0",
+  "description": "A tiny (600 bytes) clipboard hook for React/Vue/Svelte with a framework-agnostic core.",
+  "keywords": ["clipboard", "copy", "react", "hook", "javascript", "typescript"],
+  "author": "Matias Fandiño",
+  "license": "MIT",
+  "repository": "matifandy8/lite-clipboard",
+  "sideEffects": false,
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./react": "./dist/adapters/react.js",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0"
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/matiffar"
+    }
+  ],
+  "scripts": {
+    "build":         "tsc",
+    "test:lint":     "eslint .",
+    "test:coverage": "npx tsx core.test.ts && npx tsx adapters/react.test.ts",
+    "test:types":    "check-dts",
+    "test:size":     "size-limit",
+    "test":          "pnpm run /^test:/"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "jsxSingleQuote": false,
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "size-limit": [
+    {
+      "name": "useClipboard",
+      "import": { "./dist/index.js": "{ useClipboard }" },
+      "limit": "600 B"
+    },
+    {
+      "name": "core",
+      "import": { "./dist/core.js": "{ copyToClipboard, formatData }" },
+      "limit": "300 B"
+    }
+  ],
+  "devDependencies": {
+    "@logux/eslint-config": "^57.0.2",
+    "@size-limit/preset-small-lib": "^12.0.1",
+    "@types/node": "^25.5.0",
+    "@types/react": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.57.0",
+    "@typescript-eslint/parser": "^8.57.0",
+    "better-node-test": "^0.8.3",
+    "check-dts": "^0.9.0",
+    "clean-publish": "^6.0.3",
+    "eslint": "^10.0.3",
+    "size-limit": "^12.0.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "clean-publish": {
+    "cleanDocs": true
+  }
+}
