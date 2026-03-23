@@ -1,8 +1,15 @@
 {
   "name": "lite-clipboard",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A tiny (600 bytes) clipboard hook for React/Vue/Svelte with a framework-agnostic core.",
-  "keywords": ["clipboard", "copy", "react", "hook", "javascript", "typescript"],
+  "keywords": [
+    "clipboard",
+    "copy",
+    "react",
+    "hook",
+    "javascript",
+    "typescript"
+  ],
   "author": "Matias Fandiño",
   "license": "MIT",
   "repository": "matifandy8/lite-clipboard",
@@ -24,12 +31,12 @@
     }
   ],
   "scripts": {
-    "build":         "tsc",
-    "test:lint":     "eslint .",
+    "build": "tsc",
+    "test:lint": "eslint .",
     "test:coverage": "npx tsx core.test.ts && npx tsx adapters/react.test.ts",
-    "test:types":    "check-dts",
-    "test:size":     "size-limit",
-    "test":          "pnpm run /^test:/"
+    "test:types": "check-dts",
+    "test:size": "size-limit",
+    "test": "pnpm run /^test:/"
   },
   "prettier": {
     "arrowParens": "avoid",
@@ -42,12 +49,16 @@
   "size-limit": [
     {
       "name": "useClipboard",
-      "import": { "./dist/index.js": "{ useClipboard }" },
+      "import": {
+        "./dist/index.js": "{ useClipboard }"
+      },
       "limit": "600 B"
     },
     {
       "name": "core",
-      "import": { "./dist/core.js": "{ copyToClipboard, formatData }" },
+      "import": {
+        "./dist/core.js": "{ copyToClipboard, formatData }"
+      },
       "limit": "300 B"
     }
   ],
