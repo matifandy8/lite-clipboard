@@ -1,0 +1,16 @@
+# Source code
+*.ts
+*.test.ts
+
+# Config
+tsconfig.json
+eslint.config.js
+.prettierrc.json
+pnpm-lock.yaml
+.eslintcache
+coverage/
+.turbo/
+
+# Agent tools
+.atl/
+.config/

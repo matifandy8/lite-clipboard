@@ -1,7 +1,10 @@
 {
   "name": "lite-clipboard",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A tiny (600 bytes) clipboard hook for React/Vue/Svelte with a framework-agnostic core.",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "clipboard",
     "copy",
@@ -32,6 +35,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "publish:dry": "npm run build && npm pack --dry-run",
     "test:lint": "eslint .",
     "test:coverage": "npx tsx core.test.ts && npx tsx adapters/react.test.ts",
     "test:types": "check-dts",
