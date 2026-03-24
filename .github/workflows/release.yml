@@ -13,7 +13,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # Solo corre si es merge a main o push a main (no en PRs abiertos)
+    # Only runs on merge to main or push to main (not open PRs)
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     
     steps:
