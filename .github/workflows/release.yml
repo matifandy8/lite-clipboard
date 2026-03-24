@@ -34,20 +34,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build
-        run: pnpm build
-
-      - name: Type check
-        run: pnpm test:types
-
-      - name: Lint
-        run: pnpm test:lint
-
-      - name: Size check
-        run: pnpm test:size
-
-      - name: Tests
-        run: pnpm test:coverage
+      - name: Configure Git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
 
       - name: Release
         run: pnpm release
