@@ -1,6 +1,6 @@
 {
   "name": "lite-clipboard",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A tiny (600 bytes) clipboard hook for React/Vue/Svelte with a framework-agnostic core.",
   "files": [
     "dist"
