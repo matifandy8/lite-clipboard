@@ -1,5 +1,9 @@
 # lite-clipboard
 
+[![npm version](https://img.shields.io/npm/v/lite-clipboard)](https://www.npmjs.com/package/lite-clipboard)
+[![npm size](https://img.shields.io/bundlephobia/minzip/lite-clipboard)](https://bundlephobia.com/result?p=lite-clipboard)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A tiny (600 bytes) clipboard library for React/Vue/Svelte 
 with a framework-agnostic core. No dependencies. TypeScript native.
 
@@ -326,6 +330,10 @@ export function useClipboard() {
   };
 }
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 ## License
 

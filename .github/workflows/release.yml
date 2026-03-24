@@ -2,12 +2,19 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Solo corre si es merge a main o push a main (no en PRs abiertos)
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     
     steps:
       - name: Checkout
@@ -41,6 +48,11 @@ jobs:
 
       - name: Tests
         run: pnpm test:coverage
+
+      - name: Release
+        run: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to npm
         run: npm publish --access public
