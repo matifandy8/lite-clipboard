@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    # Only runs on merge to main or push to main (not open PRs)
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    # Only runs on merge to main or push to main (not open PRs), skip chore commits
+    if: (github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)) && !startsWith(github.event.head_commit.message, 'chore:')
     
     steps:
       - name: Checkout
