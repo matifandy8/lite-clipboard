@@ -63,8 +63,8 @@ BREAKING CHANGE: remove sync copy function"
 ## Size Limits
 
 The library enforces strict size limits:
-- Core utilities: < 300 bytes gzipped
-- React hook: < 600 bytes gzipped
+- Core utilities: < 300 bytes gzipped (actual: ~253 bytes)
+- React hook: < 600 bytes gzipped (actual: ~432 bytes)
 
 ---
 

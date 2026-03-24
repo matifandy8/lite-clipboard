@@ -1,17 +1,24 @@
 {
   "name": "lite-clipboard",
   "version": "0.2.12",
-  "description": "A tiny (600 bytes) clipboard hook for React/Vue/Svelte with a framework-agnostic core.",
+  "description": "Zero-dependency clipboard in 166 bytes. React hook included. Framework-agnostic core.",
   "files": [
     "dist"
   ],
   "keywords": [
     "clipboard",
+    "copy-to-clipboard",
     "copy",
+    "react-hook",
     "react",
-    "hook",
-    "javascript",
-    "typescript"
+    "vue",
+    "svelte",
+    "typescript",
+    "zero-dependency",
+    "lightweight",
+    "ssr-safe",
+    "tiny",
+    "minimal"
   ],
   "author": "Matias Fandiño",
   "license": "MIT",

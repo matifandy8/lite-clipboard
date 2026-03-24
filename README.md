@@ -1,32 +1,37 @@
 # lite-clipboard
 
+<img src="logo.png" width="64" height="64" align="left" />
+
 [![npm version](https://img.shields.io/npm/v/lite-clipboard)](https://www.npmjs.com/package/lite-clipboard)
-[![npm size](https://img.shields.io/bundlephobia/minzip/lite-clipboard)](https://bundlephobia.com/result?p=lite-clipboard)
+[![Bundle size](https://img.shields.io/bundlephobia/minzip/lite-clipboard)](https://bundlephobia.com/package/lite-clipboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A tiny (600 bytes) clipboard library for React/Vue/Svelte 
-with a framework-agnostic core. No dependencies. TypeScript native.
+**Zero-dependency clipboard in 253 bytes. React hook included. Framework-agnostic core.**
 
-**Target: <600 bytes gzipped**
+| Module | Gzipped |
+|--------|---------|
+| Core utilities | ~253 bytes |
+| React hook | ~432 bytes |
+| **Hook target** | **<600 bytes** ✅ |
+
+[React hook](#react-hook) · [Vanilla JS](#vanilla-js--framework-agnostic)
 
 ## Philosophy
 
 lite-clipboard is designed as a **framework-agnostic** library:
 
 - **Core** (`core.ts`): Pure logic with zero framework imports — works anywhere
-- **Adapters** (`adapters/`): Thin wrapper for each framework (React, Vue, Svelte...)
+- **Adapters** (`adapters/`): Thin wrapper for each framework
 - Adding a new framework = one new file in `adapters/`
 
 The architecture is inspired by [nanostores](https://github.com/nanostores/nanostores) — the same logic can be wrapped for Vue, Svelte, Solid, or any framework.
 
 **Currently supported:** React 18+
 
-**Future plans:** Vue composable, Svelte store, Solid signals.
-
 ## Features
 
+- **253 bytes** core · **432 bytes** React hook
 - Zero external dependencies
-- Tiny footprint (<600 bytes gzipped)
 - Full TypeScript support
 - Tree-shakeable
 - SSR-safe
@@ -34,6 +39,18 @@ The architecture is inspired by [nanostores](https://github.com/nanostores/nanos
 - Framework-agnostic core (add your own wrapper!)
 
 ## Why lite-clipboard?
+
+lite-clipboard is **10x smaller** than [clipboard.js](https://clipboardjs.com/) and [copy-to-clipboard](https://www.npmjs.com/package/copy-to-clipboard) while offering more features.
+
+| Feature | clipboard.js | copy-to-clipboard | lite-clipboard |
+|---------|-------------|-------------------|----------------|
+| Size (gzip) | ~2.4KB | ~1.1KB | **~342B** |
+| Dependencies | 1 | 0 | **0** |
+| React hook | ❌ | ❌ | **✅** |
+| TypeScript | Partial | ❌ | **Native** |
+| SSR-safe | Manual | Manual | **Built-in** |
+| Auto-reset | ❌ | ❌ | **✅** |
+| Callbacks | ❌ | ❌ | **✅** |
 
 ### Native JS ❌
 
@@ -93,18 +110,6 @@ function CopyButton({ text }) {
 }
 ```
 
-### Why choose lite-clipboard?
-
-| Aspect | Native JS | lite-clipboard |
-|--------|-----------|----------------|
-| Lines of code | 15+ | 1 |
-| Error handling | Manual | Built-in |
-| React state | Manual | Built-in |
-| Timeout reset | Manual | Automatic |
-| Callbacks | Manual | Built-in |
-| TypeScript | Manual | Built-in |
-| SSR safety | Manual | Built-in |
-
 ## Install
 
 npm install lite-clipboard
@@ -118,8 +123,6 @@ npm install lite-clipboard
 |---|---|---|
 | Vanilla JS | `import { copyToClipboard } from 'lite-clipboard'` | ✅ stable |
 | React | `import { useClipboard } from 'lite-clipboard/react'` | ✅ stable |
-| Vue | `import { useClipboard } from 'lite-clipboard/vue'` | 🔜 coming soon |
-| Svelte | `import { useClipboard } from 'lite-clipboard/svelte'` | 🔜 coming soon |
 
 ## Usage
 
@@ -298,14 +301,6 @@ interface UseClipboardReturn {
 }
 ```
 
-## Bundle Size
-
-| Module | Gzipped |
-|--------|---------|
-| Core utilities | ~166 bytes |
-| React hook | ~342 bytes |
-| **Hook target** | **<600 bytes** ✅ |
-
 ## Browser Support
 
 Requires `navigator.clipboard` API:
@@ -330,8 +325,6 @@ export function useClipboard() {
   };
 }
 ```
-
-## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
