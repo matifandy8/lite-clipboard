@@ -1,12 +1,9 @@
 # Dependencies
 node_modules/
 
-# Build output (if using a bundler like tsup)
-dist/
-
-# Agent tools
-.atl/
-.config/
+# Agent tools (optional - uncomment if needed)
+# .atl/
+# .config/
 
 # OS
 .DS_Store

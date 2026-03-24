@@ -1,8 +1,0 @@
-**/*.ts
-**/*.test.ts
-tsconfig.json
-eslint.config.js
-.prettierrc.json
-pnpm-lock.yaml
-.atl/
-.config/
