@@ -27,7 +27,7 @@ const MockClipboardItem = class {
 // In a real scenario, you'd use @testing-library/react or similar
 // For this test, we verify the hook's contract and behavior
 
-function setupClipboardMock(mock: { writeText?: (text: string) => Promise<void>; write?: (items: ClipboardItem[]) => Promise<void> }) {
+function setupClipboardMock(mock: { write?: (items: ClipboardItem[]) => Promise<void>; writeText?: (text: string) => Promise<void> }) {
   const originalNavigator = globalThis.navigator;
 
   Object.defineProperty(globalThis, 'navigator', {
