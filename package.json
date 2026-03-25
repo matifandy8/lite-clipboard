@@ -1,7 +1,7 @@
 {
   "name": "lite-clipboard",
-  "version": "0.2.12",
-  "description": "~400 bytes. No dependencies. Framework-agnostic clipboard with React hook.",
+  "version": "0.2.13",
+  "description": "Zero-dependency clipboard in 166 bytes. React hook included. Framework-agnostic core.",
   "files": [
     "dist"
   ],
