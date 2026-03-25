@@ -1,10 +1,6 @@
 # Dependencies
 node_modules/
 
-# Agent tools (optional - uncomment if needed)
-# .atl/
-# .config/
-
 # OS
 .DS_Store
 Thumbs.db

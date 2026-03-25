@@ -64,14 +64,14 @@
       "import": {
         "./dist/index.js": "{ useClipboard }"
       },
-      "limit": "600 B"
+      "limit": "700 B"
     },
     {
       "name": "core",
       "import": {
-        "./dist/core.js": "{ copyToClipboard, formatData }"
+        "./dist/core.js": "{ copy, copyText, copyItems }"
       },
-      "limit": "300 B"
+      "limit": "400 B"
     }
   ],
   "devDependencies": {

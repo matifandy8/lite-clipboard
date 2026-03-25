@@ -10,7 +10,10 @@ export default [
   {
     files: ['**/*.ts'],
     languageOptions: {
-      parser: tseslintParser
+      parser: tseslintParser,
+      globals: {
+        ClipboardItem: 'readonly'
+      }
     },
     plugins: {
       '@typescript-eslint': tseslintPlugin
@@ -26,7 +29,12 @@ export default [
       'perfectionist/sort-named-exports': 'off',
       'perfectionist/sort-named-imports': 'off',
       'perfectionist/sort-objects': 'off',
-      'prefer-let/prefer-let': 'off'
+      'perfectionist/sort-classes': 'off',
+      'perfectionist/sort-interfaces': 'off',
+      'perfectionist/sort-union-types': 'off',
+      'perfectionist/sort-intersection-types': 'off',
+      'prefer-let/prefer-let': 'off',
+      'no-shadow': 'off'
     }
   }
 ]
