@@ -1,12 +1,18 @@
-export { useClipboard } from './adapters/react.js'
-export type {
-  UseClipboardOptions,
-  UseClipboardReturn,
-} from './adapters/react.js'
+// Main entry - React hook
+export { useClipboard } from './adapters/react.js';
+export type { UseClipboardOptions, UseClipboardReturn } from './adapters/react.js';
+
+// Core module
 export {
-  copyToClipboard,
-  formatData,
+  copy,
+  copyText,
+  copyItems,
+  copyHtml,
+  copyJson,
   isSupported,
-  getClipboardPermission,
-} from './core.js'
-export type { CopyData, PermissionState } from './core.js'
+  hasAdvancedWrite,
+} from './core.js';
+export type { CopyInput, CopyResult } from './core.js';
+
+// Backwards compatibility - will be removed in next major version
+export { copy as copyToClipboard } from './core.js';

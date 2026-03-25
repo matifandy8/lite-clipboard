@@ -1,49 +1,59 @@
+/**
+ * React hook for clipboard operations.
+ * Provides reactive state and callbacks for clipboard interactions.
+ */
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { copyToClipboard, isSupported } from '../core.js';
+import { copy, isSupported } from '../core.js';
 export function useClipboard(options = {}) {
-    const { onError, onSuccess, timeout = 2000 } = options;
+    const { onSuccess, onError, timeout = 2000 } = options;
     const supported = isSupported();
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState(null);
     const timerRef = useRef(null);
-    const handleCopy = useCallback(async (data) => {
-        if (timerRef.current) {
-            clearTimeout(timerRef.current);
-            timerRef.current = null;
-        }
-        if (!supported) {
-            const message = 'Clipboard API not supported';
-            setError(message);
-            onError?.(message);
-            return;
-        }
-        try {
-            await copyToClipboard(data);
-            setCopied(true);
-            setError(null);
-            onSuccess?.();
-            timerRef.current = setTimeout(() => {
-                setCopied(false);
-            }, timeout);
-        }
-        catch (err) {
-            const message = err instanceof Error ? err.message : 'Unknown error';
-            setError(message);
-            onError?.(message);
-        }
-    }, [onSuccess, onError, timeout, supported]);
+    // Cleanup timer on unmount
     useEffect(() => {
         return () => {
-            if (timerRef.current) {
+            if (timerRef.current !== null) {
                 clearTimeout(timerRef.current);
-                timerRef.current = null;
             }
         };
     }, []);
+    const handleCopy = useCallback(async (input) => {
+        // Clear any pending timer
+        if (timerRef.current !== null) {
+            clearTimeout(timerRef.current);
+            timerRef.current = null;
+        }
+        // Check support first
+        if (!supported) {
+            const message = 'Clipboard API is not available in this environment';
+            setError(message);
+            setCopied(false);
+            onError?.(message);
+            return;
+        }
+        // Perform the copy
+        const result = await copy(input);
+        if (result.success) {
+            setCopied(true);
+            setError(null);
+            onSuccess?.();
+            // Auto-reset copied state after timeout
+            timerRef.current = setTimeout(() => {
+                setCopied(false);
+                timerRef.current = null;
+            }, timeout);
+        }
+        else {
+            setCopied(false);
+            setError(result.error ?? 'Unknown error');
+            onError?.(result.error ?? 'Unknown error');
+        }
+    }, [onSuccess, onError, timeout, supported]);
     return {
         copied,
-        copy: handleCopy,
         error,
         supported,
+        copy: handleCopy,
     };
 }

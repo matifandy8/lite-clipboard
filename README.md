@@ -1,333 +1,65 @@
 # lite-clipboard
 
-<img src="logo.png" width="64" height="64" align="left" />
+**~400 bytes. No dependencies. Works.**
 
-[![npm version](https://img.shields.io/npm/v/lite-clipboard)](https://www.npmjs.com/package/lite-clipboard)
-[![Bundle size](https://img.shields.io/bundlephobia/minzip/lite-clipboard)](https://bundlephobia.com/package/lite-clipboard)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-**Zero-dependency clipboard in 253 bytes. React hook included. Framework-agnostic core.**
-
-| Module | Gzipped |
-|--------|---------|
-| Core utilities | ~253 bytes |
-| React hook | ~432 bytes |
-| **Hook target** | **<600 bytes** ✅ |
-
-[React hook](#react-hook) · [Vanilla JS](#vanilla-js--framework-agnostic)
-
-## Philosophy
-
-lite-clipboard is designed as a **framework-agnostic** library:
-
-- **Core** (`core.ts`): Pure logic with zero framework imports — works anywhere
-- **Adapters** (`adapters/`): Thin wrapper for each framework
-- Adding a new framework = one new file in `adapters/`
-
-The architecture is inspired by [nanostores](https://github.com/nanostores/nanostores) — the same logic can be wrapped for Vue, Svelte, Solid, or any framework.
-
-**Currently supported:** React 18+
-
-## Features
-
-- **253 bytes** core · **432 bytes** React hook
-- Zero external dependencies
-- Full TypeScript support
-- Tree-shakeable
-- SSR-safe
-- React hook included
-- Framework-agnostic core (add your own wrapper!)
-
-## Why lite-clipboard?
-
-lite-clipboard is **10x smaller** than [clipboard.js](https://clipboardjs.com/) and [copy-to-clipboard](https://www.npmjs.com/package/copy-to-clipboard) while offering more features.
-
-| Feature | clipboard.js | copy-to-clipboard | lite-clipboard |
-|---------|-------------|-------------------|----------------|
-| Size (gzip) | ~2.4KB | ~1.1KB | **~342B** |
-| Dependencies | 1 | 0 | **0** |
-| React hook | ❌ | ❌ | **✅** |
-| TypeScript | Partial | ❌ | **Native** |
-| SSR-safe | Manual | Manual | **Built-in** |
-| Auto-reset | ❌ | ❌ | **✅** |
-| Callbacks | ❌ | ❌ | **✅** |
-
-### Native JS ❌
-
-```javascript
-// ❌ Verbose, manual error handling
-const copyToClipboard = async (text) => {
-  if (!navigator.clipboard) {
-    throw new Error('Clipboard not supported');
-  }
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (err) {
-    throw new Error('Copy failed: ' + err.message);
-  }
-};
-```
-
-### lite-clipboard ✅
-
-```javascript
-import { copyToClipboard } from 'lite-clipboard';
-
-// ✅ 1 line, handles everything
-await copyToClipboard('Hello!');
-```
-
-### Native React ❌
-
-```tsx
-function CopyButton({ text }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    if (!navigator.clipboard) return;
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  return <button onClick={handleCopy}>{copied ? 'Copied!' : 'Copy'}</button>;
-}
-```
-
-### lite-clipboard ✅
-
-```tsx
-import { useClipboard } from 'lite-clipboard';
-
-function CopyButton({ text }) {
-  const { copied, copy } = useClipboard();
-
-  return <button onClick={() => copy(text)}>{copied ? 'Copied!' : 'Copy'}</button>;
-}
-```
-
-## Install
-
+```bash
 npm install lite-clipboard
-
-> lite-clipboard is fully tree-shakeable. Import only what you need
-> and your bundler will eliminate the rest.
-
-## Framework support
-
-| Framework | Import | Status |
-|---|---|---|
-| Vanilla JS | `import { copyToClipboard } from 'lite-clipboard'` | ✅ stable |
-| React | `import { useClipboard } from 'lite-clipboard/react'` | ✅ stable |
+```
 
 ## Usage
 
-### Default (React)
-
-import { useClipboard } from 'lite-clipboard'
-
-### Framework-specific (tree-shakeable)
-
-import { useClipboard } from 'lite-clipboard/react'
-
-### Vanilla JS / Framework agnostic
-
-import { copyToClipboard, formatData, isSupported } from 'lite-clipboard'
-
-### Core (Framework-Agnostic)
-
-The core module works anywhere — browser, Node.js (with clipboard polyfill), or any framework.
-
-```typescript
-import { isSupported, copyToClipboard, formatData } from 'lite-clipboard';
-
-// Check if clipboard API is available
-if (isSupported()) {
-  // Copy string
-  await copyToClipboard('Hello!');
-
-  // Copy JSON (auto-formatted as pretty JSON)
-  await copyToClipboard({ type: 'json', value: { name: 'test' } });
-
-  // Copy code
-  await copyToClipboard({ type: 'code', value: 'const x = 1', language: 'js' });
-}
-
-// Format without copying
-const text = formatData({ type: 'json', value: { foo: 'bar' } });
-// → "{\n  \"foo\": \"bar\"\n}"
-```
-
-### React Hook
-
 ```tsx
 import { useClipboard } from 'lite-clipboard';
 
 function CopyButton({ text }) {
   const { copied, copy } = useClipboard();
-
-  return (
-    <button onClick={() => copy(text)}>
-      {copied ? 'Copied!' : 'Copy'}
-    </button>
-  );
-}
-```
-
-#### With Callbacks
-
-```tsx
-import { useClipboard } from 'lite-clipboard';
-
-function CopyButton({ text }) {
-  const { copy } = useClipboard({
-    onSuccess: () => console.log('Copied!'),
-    onError: (err) => console.error('Failed:', err),
-  });
-
-  return <button onClick={() => copy(text)}>Copy</button>;
-}
-```
-
-#### With Auto-Reset
-
-```tsx
-import { useClipboard } from 'lite-clipboard';
-
-function CopyButton({ text }) {
-  // Auto-reset copied state after 2 seconds (default)
-  const { copied, copy } = useClipboard({ timeout: 2000 });
-
   return <button onClick={() => copy(text)}>{copied ? 'Copied!' : 'Copy'}</button>;
 }
 ```
 
-## Advanced Usage
+## Vanilla JS
 
-### Copy HTML
+```js
+import { copy } from 'lite-clipboard';
 
-Copies rich text with HTML formatting:
+// String, Blob, ClipboardItem — all work
+await copy('Hello!');
+await copy(imageBlob);
+await copy(new ClipboardItem({ 'text/html': htmlBlob }));
 
-```tsx
-copyToClipboard({
-  type: 'html',
-  value: '<h1>Hello World</h1><p>Formatted text</p>'
-})
-```
-
-### Check Permissions (Advanced)
-
-Most of the time, clipboard works without explicit permission. However, `getClipboardPermission()` is useful for detecting edge cases:
-
-```typescript
-import { getClipboardPermission } from 'lite-clipboard'
-
-const state = await getClipboardPermission()
-// 'granted' | 'denied' | 'prompt' | 'unsupported'
-```
-
-**When it matters:**
-- Automated testing (Playwright, Puppeteer)
-- Users with privacy extensions
-- Embedded iframes without proper permissions
-- HTTP context (requires HTTPS in production)
-
-**For most users, clipboard works automatically.**
-
-```typescript
-// Most of the time, just use it directly:
-const { copy } = useClipboard()
-copy('Hello!')
-```
-
-### Copy Image
-
-Copy images as Blob:
-
-```tsx
-copyToClipboard({
-  type: 'image',
-  value: imageBlob
-})
+// Convenience helpers
+await copyHtml('<b>Bold</b>');
+await copyJson({ name: 'Alice' });
 ```
 
 ## API
 
-### CopyData Type
+```ts
+// React hook
+const { copied, copy, error, supported } = useClipboard({ timeout: 2000 });
+await copy('text');
 
-```typescript
-type CopyData =
-  | string
-  | { type: 'json'; value: unknown }
-  | { type: 'code'; value: string; language: string }
-  | { type: 'html'; value: string }
-  | { type: 'image'; value: Blob }
+// Core
+copy(text: string | Blob | ClipboardItem): Promise<CopyResult>
+copyText(text: string): Promise<CopyResult>
+copyHtml(html: string, plainText?: string): Promise<CopyResult>
+copyJson(data: unknown): Promise<CopyResult>
+isSupported(): boolean
 ```
 
-### Core Functions
+## CopyResult
 
-| Function | Type | Description |
-|----------|------|-------------|
-| `isSupported()` | `() => boolean` | Check if Clipboard API is available (SSR-safe) |
-| `copyToClipboard(data)` | `(data: CopyData) => Promise<void>` | Copy to clipboard |
-| `formatData(data)` | `(data: CopyData) => string` | Format data without copying |
-| `getClipboardPermission()` | `() => Promise<PermissionState>` | Advanced: Check clipboard permission status (mainly for testing/CI) |
-| `copy` | alias for `copyToClipboard` | Shorthand |
-
-### PermissionState Type
-
-```typescript
-type PermissionState = 'granted' | 'denied' | 'prompt' | 'unsupported'
+```ts
+{ success: true } | { success: false, error: string }
 ```
 
-### React Hook
+## Size
 
-```typescript
-interface UseClipboardOptions {
-  timeout?: number;        // Auto-reset delay in ms (default: 2000)
-  onSuccess?: () => void; // Called on successful copy
-  onError?: (error: string) => void; // Called on error
-}
-
-interface UseClipboardReturn {
-  copied: boolean;         // Current copied state
-  error: string | null;   // Current error message
-  supported: boolean;      // Clipboard API availability
-  copy: (data: CopyData) => Promise<void>;
-}
-```
+| Module | Gzipped |
+|--------|---------|
+| Core | 327B |
+| React hook | 518B |
 
 ## Browser Support
 
-Requires `navigator.clipboard` API:
-
-- Chrome 
-- Firefox 
-- Safari
-- Edge
-
-## Contributing
-
-The core is intentionally minimal. Want to add Vue or Svelte support? The core API is designed to be wrapped easily:
-
-```typescript
-// Example: Your own Vue composable
-import { copyToClipboard, isSupported } from 'lite-clipboard';
-
-export function useClipboard() {
-  return {
-    copy: copyToClipboard,
-    supported: isSupported(),
-  };
-}
-```
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
-
-## License
-
-MIT
+Requires `navigator.clipboard`. All modern browsers.
